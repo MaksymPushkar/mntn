@@ -1,0 +1,38 @@
+@use "sass:math";
+@use "_reset.scss";
+@use "_colors.scss" as *;
+@use "_fonts.scss" as *;
+@use "_mixins.scss" as *;
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: $fontMain;
+	font-size: toRem(18);
+	font-weight: 700;
+	line-height: 1.77778;
+	color: $colorWeiB;
+	background-color: $colorBG;
+	overflow: hidden;
+	&.loaded {
+		overflow: auto;
+	}
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	overflow: clip;
+	> main {
+		flex-grow: 1;
+	}
+}
+
+[class*="__container"] {
+	max-width: toRem($containerWidth);
+	padding-inline: toRem(math.div($containerPadding, 2));
+	margin: 0 auto;
+}

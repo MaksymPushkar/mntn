@@ -1,0 +1,82 @@
+@use "_colors.scss" as *;
+@use "_fonts.scss" as *;
+@use "_mixins.scss" as *;
+
+.components {
+	padding-block: toRem(15);
+	&__container {
+		& > * {
+			margin-bottom: toRem(64);
+		}
+		& > *:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.label {
+	color: $colorAccent;
+	font-weight: 800;
+	line-height: 1.2;
+	letter-spacing: 6px;
+	font-size: toRem(18);
+	text-transform: uppercase;
+	/* .label--icon-line-horizontal */
+	&::before {
+		content: "";
+		background-color: $colorAccent;
+		width: clamp(2.25rem, 1.62rem + 3.15vw, 4.5rem); /* 72->36 1462->320 */
+		height: 0.11111111em; /* 2/18 */
+		margin-right: clamp(0.75rem, 0.54rem + 1.05vw, 1.5rem); /* 24->12 1462->320 */
+		vertical-align: super;
+	}
+}
+
+.heading {
+	& > * {
+		margin-bottom: toRem(27);
+	}
+	/* .heading__label */
+	&__label {
+		text-wrap: balance;
+	}
+	/* .heading__title */
+	&__title {
+		color: $colorWeiB;
+		font-family: $fontSecondary;
+		@include adaptiveValue(font-size, 64, 40);
+		font-weight: 600;
+		line-height: 1.2;
+	}
+	& > *:last-child {
+		margin-bottom: 0;
+	}
+	&--big {
+		& > * {
+			margin-bottom: toRem(32);
+		}
+		/* .heading__label */
+		.heading__label {
+			font-size: min(3vmin, toRem(18));
+			&::before {
+				width: min(11vmin, toRem(72)); /* 72->36 1462->320 */
+				margin-right: min(5vmin, toRem(32)); /* 32->16 1462->320 */
+			}
+		}
+		/* .heading__title */
+		.heading__title {
+			color: $colorWeiB;
+			font-family: $fontSecondary;
+			font-weight: 600;
+			font-size: min(9vmin, toRem(88));
+			line-height: 1.13636;
+			text-transform: capitalize;
+			// @media (max-aspect-ratio: 3/2) {
+			// 	@include adaptiveValue(font-size, 88, 40);
+			// }
+		}
+		& > *:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

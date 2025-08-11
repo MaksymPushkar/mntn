@@ -1,0 +1,33 @@
+@use "_colors.scss" as *;
+@use "_fonts.scss" as *;
+@use "_mixins.scss" as *;
+
+.preloader {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 1;
+	background-color: $colorBG;
+
+	color: $colorWeiB;
+	font-family: $fontSecondary;
+	@include adaptiveValue(font-size, 96, 64);
+	font-weight: 700;
+	letter-spacing: toRem(0.32);
+	text-transform: uppercase;
+	line-height: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	transition: 0.8s ease;
+
+	.loaded & {
+		visibility: hidden;
+		opacity: 0;
+	}
+}

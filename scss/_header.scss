@@ -1,0 +1,276 @@
+@use "_colors.scss" as *;
+@use "_fonts.scss" as *;
+@use "_mixins.scss" as *;
+
+.header {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 100;
+	pointer-events: none;
+	&::after {
+		content: "";
+		transition: 0.3s ease;
+		position: absolute;
+		width: 100%;
+		height: 0;
+		padding-block: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		background-image: var(--header-top-bg-img);
+	}
+	&.scrolled::after {
+		height: var(--header-top-height);
+	}
+	&__container {
+		display: grid;
+		height: 100%;
+		grid-template-columns: auto 1fr auto;
+		grid-template-rows: auto 1fr;
+	}
+	/* .header__top */
+	&__top {
+		grid-column: span 3;
+
+		display: grid;
+		grid-auto-flow: dense;
+		grid-template-columns: repeat(3, auto);
+		gap: toRem(15);
+		row-gap: toRem(5);
+		align-items: center;
+		justify-content: space-between;
+		pointer-events: auto;
+		z-index: 100;
+		padding-block: clamp(0.5rem, -0.277rem + 3.88vw, 4rem);
+
+		position: relative;
+		&--anim {
+			opacity: 0;
+			visibility: hidden;
+			transition: 1s ease;
+			translate: 0 toRem(-50);
+			transition-delay: 0.8s;
+			&.animate {
+				opacity: 1;
+				visibility: visible;
+				translate: 0 0;
+			}
+		}
+		@media (max-width: 37.5rem) {
+			grid-template-columns: repeat(2, auto);
+		}
+	}
+	/* .header__left */
+	&__left {
+		display: flex;
+		align-items: center;
+		&--anim {
+			opacity: 0;
+			visibility: hidden;
+			transition: 1s ease;
+			translate: -150% 0;
+			transition-delay: 0.8s;
+			&.animate {
+				opacity: 1;
+				visibility: visible;
+				translate: 0 0;
+			}
+		}
+	}
+	/* .header__right */
+	&__right {
+		display: flex;
+		align-items: center;
+		justify-self: end;
+		&--anim {
+			opacity: 0;
+			visibility: hidden;
+			transition: 1s ease;
+			translate: toRem(50) 0;
+			transition-delay: 0.8s;
+			&.animate {
+				opacity: 1;
+				visibility: visible;
+				translate: 0 0;
+			}
+		}
+		@media (max-width: 48em) {
+			display: none;
+		}
+	}
+	/* .header__logo */
+	&__logo {
+		color: $colorWeiB;
+		font-family: $fontSecondary;
+		font-size: toRem(32);
+		font-weight: 700;
+		letter-spacing: 0.32px;
+		text-transform: uppercase;
+		line-height: 1;
+	}
+	/* .header__nav */
+	&__nav {
+		@media (max-width: 37.5rem) {
+			grid-column: span 2;
+		}
+	}
+	/* .header__list */
+	&__list {
+		display: flex;
+		@include adaptiveValue(column-gap, 40, 15);
+		align-items: center;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
+	/* .header__item */
+	&__item {
+		position: relative;
+		transition: 0.3s ease;
+		&::before {
+			content: "";
+			position: absolute;
+			height: toRem(2);
+			width: 0%;
+			bottom: 0;
+			left: 0;
+			background-color: $colorAccent;
+			transition: 0.3s ease;
+		}
+		@media (any-hover: hover) and (any-pointer: fine) {
+			&:hover {
+				color: darken($colorWeiB, 20);
+				&::before {
+					width: 100%;
+				}
+			}
+		}
+	}
+	/* .header__account */
+	&__account {
+		justify-self: end;
+		display: flex;
+		gap: toRem(10);
+		font-size: toRem(17);
+		line-height: 1.2;
+		align-items: center;
+		transition: 0.3s ease color;
+		/* .header__account--icon-account */
+		&--icon-account::before {
+			font-size: toRem(20);
+			align-self: start;
+			font-weight: 100;
+		}
+		@media (any-hover: hover) and (any-pointer: fine) {
+			&:hover {
+				color: darken($colorWeiB, 20);
+			}
+		}
+	}
+}
+
+.left-header {
+	overflow: hidden;
+	&__body {
+		pointer-events: auto;
+		mask-image: linear-gradient(
+			180deg,
+			transparent toRem(5),
+			rgba(0, 0, 0, 1) toRem(15),
+			rgba(0, 0, 0, 1) calc(100% - toRem(15)),
+			transparent calc(100% - toRem(5))
+		);
+		max-height: 100%;
+		overflow: auto;
+		padding-block: toRem(15);
+		scrollbar-width: none;
+		max-height: 100%;
+	}
+	/* .left-header__row */
+	&__row {
+		display: inline-flex;
+		flex-direction: column;
+		gap: toRem(24);
+		align-items: center;
+	}
+	/* .left-header__label */
+	&__label {
+		writing-mode: vertical-lr;
+		text-wrap: nowrap;
+		line-height: 1.2;
+	}
+	/* .left-header__link */
+	&__link {
+		width: toRem(24);
+		height: toRem(24);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: 0.3s ease color;
+		flex-shrink: 0;
+		/* .left-header__link--icon-s-instagram */
+		&--icon-s-instagram {
+			font-size: toRem(20);
+			font-weight: normal;
+		}
+		/* .left-header__link--icon-s-twitter */
+		&--icon-s-twitter {
+			font-size: toRem(17);
+			font-weight: normal;
+		}
+		@media (any-hover: hover) and (any-pointer: fine) {
+			&:hover {
+				color: darken($colorWeiB, 20);
+			}
+		}
+	}
+}
+
+.right-header {
+	overflow: hidden;
+	&__body {
+		pointer-events: auto;
+		mask-image: linear-gradient(
+			180deg,
+			transparent toRem(5),
+			rgba(0, 0, 0, 1) toRem(15),
+			rgba(0, 0, 0, 1) calc(100% - toRem(15)),
+			transparent calc(100% - toRem(5))
+		);
+		max-height: 100%;
+		overflow: auto;
+		padding-block: toRem(15);
+		scrollbar-width: none;
+		max-height: 100%;
+	}
+	&__row {
+		max-width: toRem(150);
+		display: inline-flex;
+		flex-direction: column;
+	}
+	/* .right-header__link */
+	&__link {
+		position: relative;
+		padding: toRem(16) toRem(35) toRem(16) toRem(20);
+		text-align: right;
+		line-height: 1.2;
+		&::after {
+			content: "";
+			position: absolute;
+			width: toRem(3);
+			top: 0;
+			right: 0;
+			bottom: 0;
+			background-color: $colorWeiB;
+			opacity: 0.5;
+			transition: 0.3s ease opacity;
+		}
+		@media (any-hover: hover) and (any-pointer: fine) {
+			&:hover {
+				&::after {
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
